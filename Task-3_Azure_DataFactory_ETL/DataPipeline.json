@@ -1,0 +1,30 @@
+{
+    "name": "DynamicsDataPipeline",
+    "properties": {
+      "activities": [
+        {
+          "name": "LookupRecord",
+          "type": "Lookup",
+          "typeProperties": {
+            "source": {
+              "type": "SqlSource",
+              "sqlReaderQuery": "SELECT * FROM source_table"
+            }
+          }
+        },
+        {
+          "name": "CopyToDynamics365",
+          "type": "Copy",
+          "inputs": [ "source_table" ],
+          "outputs": [ "dynamics365_table" ],
+          "typeProperties": {
+            "sink": {
+              "type": "DynamicsSink",
+              "writeBehavior": "upsert"
+            }
+          }
+        }
+      ]
+    }
+  }
+  

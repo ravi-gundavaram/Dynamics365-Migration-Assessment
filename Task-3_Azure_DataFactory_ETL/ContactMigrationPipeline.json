@@ -1,0 +1,28 @@
+{
+    "name": "ContactMigrationPipeline",
+    "properties": {
+      "activities": [
+        {
+          "name": "LookupContact",
+          "type": "Lookup",
+          "typeProperties": {
+            "source": {
+              "type": "SqlSource",
+              "sqlReaderQuery": "SELECT * FROM Contacts WHERE status = 'active'"
+            }
+          }
+        },
+        {
+          "name": "UpsertToDynamics365",
+          "type": "Copy",
+          "typeProperties": {
+            "sink": {
+              "type": "DynamicsSink",
+              "writeBehavior": "upsert"
+            }
+          }
+        }
+      ]
+    }
+  }
+  

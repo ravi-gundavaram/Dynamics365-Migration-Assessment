@@ -1,0 +1,35 @@
+{
+    "name": "LeadsMigrationPipeline",
+    "properties": {
+      "activities": [
+        {
+          "name": "FetchLeads",
+          "type": "Lookup",
+          "typeProperties": {
+            "source": {
+              "type": "SqlSource",
+              "sqlReaderQuery": "SELECT * FROM Leads WHERE isMigrated = 0"
+            }
+          }
+        },
+        {
+          "name": "CopyLeadsToDynamics",
+          "type": "Copy",
+          "typeProperties": {
+            "sink": {
+              "type": "DynamicsSink",
+              "writeBehavior": "upsert"
+            }
+          }
+        },
+        {
+          "name": "UpdateLeadStatus",
+          "type": "StoredProcedure",
+          "typeProperties": {
+            "storedProcedureName": "sp_UpdateLeadStatus"
+          }
+        }
+      ]
+    }
+  }
+  
