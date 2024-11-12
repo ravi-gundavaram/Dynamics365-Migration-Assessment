@@ -1,6 +1,6 @@
 # Dynamics365-Migration-Assessment
 
-This repository contains the code, documentation, and pipelines required for migrating Dynamics 365 from an on-premise setup to the cloud for Aquarelle Ltd. The tasks covered include Dynamics 365 customizations, plugin development, Angular app functionality, and Azure Data Factory ETL pipelines.
+This repository contains the code, documentation, and pipelines required for migrating Dynamics 365 from an on-premise setup to the cloud. The tasks covered include Dynamics 365 customizations, plugin development, Angular app functionality, and Azure Data Factory ETL pipelines.
 
 # Project Overview
 
