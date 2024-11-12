@@ -18,7 +18,71 @@ This repository contains the code, documentation, and pipelines required for mig
    - Integration of Azure API Management to connect securely with on-premise APIs.
    - Azure Data Factory pipelines for migrating leads, contacts, and tasks from Dynamics 365 on-premise to the cloud environment while maintaining metadata like `createdOn`, `createdBy`, and `modifiedBy`.
 
+To test the code
 
+1. Dynamics 365 Plugin Testing:
+Set Up a Dynamics 365 Development Environment:
+
+Use a Dynamics 365 Sandbox or trial environment.
+Register plugins using the Plugin Registration Tool from the Power Platform Tools.
+Ensure necessary permissions in the environment to register plugins.
+Deploy and Test LeadCustomizationPlugin:
+
+Open Visual Studio and build the plugin project.
+Use the Plugin Registration Tool to register LeadCustomizationPlugin on the Create or Update message for the Lead entity.
+Test the plugin by creating or updating a lead in Dynamics 365 to see if the custom field new_customfield is set correctly.
+Debugging: Use ILSpy or enable Profiler in the Plugin Registration Tool to debug any errors.
+Deploy and Test DeclinePlugin:
+
+Register DeclinePlugin on a custom message if it’s triggered by an API call or associate it with an entity action.
+Trigger the plugin by calling the API endpoint with test data and verify if the decline information is recorded correctly.
+2. Angular Application Testing:
+Set Up Angular Environment:
+
+Ensure Node.js and Angular CLI are installed.
+Navigate to the Angular app directory and install dependencies:
+
+cd Task2_CSharp_Plugins_Angular_App/AngularApp
+npm install
+Run and Test the Angular App:
+
+Start the Angular development server:
+
+ng serve
+Access the app locally via http://localhost:4200.
+
+Test the Decline Invite functionality:
+Enter a test email and click the "Decline Invitation" button.
+Ensure the API call is successful (verify in browser console or network tab).
+Use a mock backend or set up a testing API endpoint that mirrors Dynamics 365 to handle the decline response.
+Test Notification System:
+
+Ensure the notification component correctly retrieves and displays pending tasks.
+Simulate the /api/fetchTasks endpoint with a local JSON server or mock data if the backend is not available.
+3. Azure Data Factory Pipeline Testing:
+Azure Data Factory Configuration:
+
+Set up an Azure Data Factory (ADF) instance.
+Import the pipeline JSON files (DataPipeline.json, ContactMigrationPipeline.json, and LeadsMigrationPipeline.json) into ADF.
+Configure Linked Services for data sources, such as SQL Server (or another supported database) and Dynamics 365.
+Pipeline Execution:
+
+Run each pipeline in Debug Mode in ADF to verify data migration and transformations.
+Test lookup functionality by ensuring it retrieves the correct records.
+Ensure that Upsert operations are handled correctly in Dynamics 365 by validating records after the pipeline run.
+Testing On-Premises Connectivity (if applicable):
+
+Use Azure API Management with a self-hosted integration runtime if you need to connect to on-premises resources. Test both GET and POST operations to ensure data flows as expected.
+Verify that the pipelines maintain relationships and metadata (createdOn, createdBy, etc.).
+4. General Debugging and Validation:
+Logs and Error Tracking:
+
+Use logs for plugin actions (add TracingService in plugins) to capture and review any errors or unexpected behavior.
+Ensure Angular and ADF provide clear error messages or logs if there are any issues.
+
+Data Verification:
+
+After running pipelines, verify data integrity in Dynamics 365 by checking if all fields are migrated correctly and security roles are respected.
 Setup Instructions
 Prerequisites
 Dynamics 365 Sandbox or Trial Environment for plugin testing.
